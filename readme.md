@@ -14,16 +14,16 @@ I used Fedora for this project so installation instructions may vary.
 Installing the Libraries
 
 Install g++
-sudo dnf install gcc-c++
+yum install gcc-c++
 
 Install SDL
-sudo dnf install SDL*
+yum install SDL*
 
 Install rapidjson
-sudo dnf install rapidjson
+yum install rapidjson
 
 Install Dev Tools
-sudo dnf groupinstall 'Development Tools'
+yum groupinstall 'Development Tools'
 
 Install curl
 Found the development installer at:
