@@ -1,0 +1,1 @@
+g++ frustum.cc -lcurl -lGL -lSDL -lSDL_ttf -lSDL_image -I/usr/include/SDL GL_SDL_WindowManager.cc SDLEventDispatcher.cc TextureUtil.cc TextModel.cc WhiteBoard.cc ProjectManager.cc main.cc && ./a.out
