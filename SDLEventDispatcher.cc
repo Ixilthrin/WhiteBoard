@@ -12,8 +12,10 @@ void SDLEventDispatcher::pollEvents()
 {
     SDL_Event sdlEvent;
     SDLKey key;
+    static long previousTicks = 0;
 
     while (SDL_PollEvent(&sdlEvent)) {
+
         switch(sdlEvent.type) {
             case SDL_KEYDOWN:
                 keyDownEvent();
@@ -39,6 +41,13 @@ void SDLEventDispatcher::pollEvents()
                 int y = sdlEvent.button.y;
                 if (sdlEvent.button.button == SDL_BUTTON_LEFT)
                 {
+                    long ticks = SDL_GetTicks();
+                    long diffTicks = ticks - previousTicks;
+                    previousTicks = ticks;
+                    if (diffTicks > 40 && diffTicks < 200)
+                    {
+                        // double click
+                    }
                 }
                 else if (sdlEvent.button.button == SDL_BUTTON_RIGHT)
                 {

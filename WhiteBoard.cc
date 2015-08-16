@@ -63,7 +63,16 @@ void WhiteBoard::run()
     float matrix[16];
     std::copy(values.begin(), values.end(), matrix);
     glMultMatrixf(matrix);
+
+    long previousTickCount = 0;
+
     while (1) {
+        long currentTickCount = SDL_GetTicks();
+        long ticksSinceLastFrame = currentTickCount - previousTickCount;
+        previousTickCount = currentTickCount;
+
+        int framesPerSecons = 1000L / ticksSinceLastFrame;
+
         eventDispatcher->pollEvents();
 
         if (userQuit)
