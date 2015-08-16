@@ -2,8 +2,10 @@
 #define __whiteboard_h__
 
 #include "IProgram.h"
+#include "IEventHandler.h"
 
 #include "GL_SDL_WindowManager.h"
+#include "SDLEventDispatcher.h"
 #include "SDLTextSurface.h"
 #include "TextureUtil.h"
 #include "TextModel.h"
@@ -24,7 +26,7 @@
 using namespace std;
 
 
-class WhiteBoard : public IProgram
+class WhiteBoard : public IProgram, public IEventHandler
 {
 public:
     WhiteBoard();
@@ -33,8 +35,11 @@ public:
     void addString(string s);
     string getUName() { return uname; }
     string getPWord() { return pword; }
+
+    virtual void keyPressed();
 private:
     GL_SDL_WindowManager *windowManager;
+    SDLEventDispatcher *eventDispatcher;
     Frustum *frustum;
     float screenWidth;
     float screenHeight;
@@ -42,6 +47,7 @@ private:
     vector<TextModel *> textModels;
     string uname;
     string pword;
+    bool userQuit;
 };
 
 

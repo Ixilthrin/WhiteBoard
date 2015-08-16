@@ -7,12 +7,12 @@ class SDLEventDispatcher {
 public:
     SDLEventDispatcher();
     void pollEvents();
-    void keyDownEvent();
     void setEventHandler(IEventHandler *handler) {
         eventHandler = handler;
     }
 private:
     IEventHandler *eventHandler;
+    void keyDownEvent();
 };
 
 #endif

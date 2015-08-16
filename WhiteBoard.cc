@@ -5,9 +5,12 @@
 WhiteBoard::WhiteBoard()
 {
     windowManager = new GL_SDL_WindowManager();
+    eventDispatcher = new SDLEventDispatcher();
+    eventDispatcher->setEventHandler(this);
     screenWidth = 800;
     screenHeight = 600;
     frustum = new Frustum(screenWidth, screenHeight, .45, 1, 5000);
+    userQuit = false;
 }
 
 void WhiteBoard::clearScreen()
@@ -24,20 +27,9 @@ void WhiteBoard::addString(string s)
     textModels.push_back(textModel);
 }
 
-bool get_input(void) {
-    SDL_Event event;
-    while (SDL_PollEvent(&event)) {
-        switch (event.type) {
-            case SDL_QUIT:
-                return false;
-            case SDL_KEYDOWN:
-                if (event.key.keysym.sym == SDLK_ESCAPE) {
-                    return false;
-                }
-                break;
-        }
-    }
-    return true;
+void WhiteBoard::keyPressed()
+{
+    userQuit = true;
 }
 
 void WhiteBoard::run()
@@ -72,7 +64,9 @@ void WhiteBoard::run()
     std::copy(values.begin(), values.end(), matrix);
     glMultMatrixf(matrix);
     while (1) {
-        if (!get_input())
+        eventDispatcher->pollEvents();
+
+        if (userQuit)
             break;
 
         clearScreen();
